@@ -13,9 +13,9 @@ html,body{overflow-x:hidden;}
 
 /* ============ HERO ============ */
 .hero{height:100vh;display:none;flex-direction:column;justify-content:center;align-items:center;color:#fff;text-align:center;position:relative;box-shadow:inset 0 0 50px rgba(0,0,0,0.7);}
-.hero.active{display:flex;}
+.hero.active{display:flex;animation:fadeIn .6s ease;}
 .hero::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.4);z-index:1;}
-.hero__img{position:absolute;top:0;left:0;width:100%;height:100vh;object-fit:cover;z-index:-1;opacity:0.85;}
+.hero__img{position:absolute;top:0;left:0;width:100%;height:100vh;object-fit:cover;z-index:-1;opacity:0.85;transition:opacity .6s ease;}
 .hero__overlay{width:clamp(270px,60%,800px);height:auto;box-shadow:0 0 70px rgba(0,0,0,0.7);background-color:rgba(63,63,63,0.4);backdrop-filter:blur(6px);border-radius:10px;z-index:2;padding:2.5rem 1.5rem;}
 .hero__overlay *{position:relative;z-index:2;}
 .title{font-size:clamp(2rem,4rem,6rem);margin-bottom:clamp(1rem,2rem,3rem);text-shadow:2px 2px 4px rgba(0,0,0,0.7);font-family:"Montserrat",sans-serif;}
@@ -26,14 +26,15 @@ html,body{overflow-x:hidden;}
 
 /* ============ LOGIN / REGISTRO ============ */
 .login,.registro{height:100vh;display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;font-weight:bold;color:#fff;}
-.login.active,.registro.active{display:flex;}
-.login__img,.registro__img{position:absolute;top:0;left:0;width:100%;height:100vh;object-fit:cover;z-index:-1;opacity:0.8;}
+.login.active,.registro.active{display:flex;animation:fadeIn .6s ease;}
+.login__img,.registro__img{position:absolute;top:0;left:0;width:100%;height:100vh;object-fit:cover;z-index:-1;opacity:0.8;transition:opacity .6s ease;}
 .login::before,.registro::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.35);z-index:0;}
 .login__container,.registro__container{width:clamp(270px,60%,700px);padding:30px 20px;border-radius:50px;z-index:1;background:rgba(90,90,90,0.3);backdrop-filter:blur(9px);box-shadow:0 6px 20px rgba(0,0,0,0.3);font-size:larger;position:relative;}
 .subtitle{font-size:clamp(1.2rem,2.4rem,3rem);margin-bottom:1.4rem;text-shadow:2px 2px 4px rgba(0,0,0,0.7);font-family:"Open Sans",sans-serif;padding:1%;color:#f0f0f0;}
 .role-tabs{display:flex;gap:.6rem;justify-content:center;margin-bottom:1.4rem;}
-.role-tab{padding:.5rem 1.4rem;border-radius:22px;border:2px solid #fff;background:transparent;color:#fff;font-weight:700;cursor:pointer;transition:.3s;font-family:"Montserrat",sans-serif;}
-.role-tab.active{background:#28a745;border-color:#28a745;}
+.role-tab{padding:.5rem 1.4rem;border-radius:22px;border:2px solid #fff;background:rgba(255,255,255,.1);color:#fff;font-weight:700;cursor:pointer;transition:.25s ease;font-family:"Montserrat",sans-serif;opacity:.8;}
+.role-tab:hover{opacity:1;}
+.role-tab.active{background:#28a745;border-color:#28a745;box-shadow:0 4px 16px rgba(40,167,69,.55);transform:scale(1.06);opacity:1;}
 .auth-field{display:flex;align-items:center;gap:.7rem;justify-content:center;margin:.5rem 0;}
 .auth-field i{width:22px;color:#fff;font-size:1rem;}
 #nombreNegocio,#emailReg,#passwordReg,#emailLogin,#passwordLogin{all:unset;display:inline-block;width:min(72%,440px);margin:14px 0;border-bottom:2px solid #ffffff;font-family:"Open Sans",sans-serif;transition:.7s;color:#f0f0f0;text-align:left;}
@@ -52,11 +53,12 @@ input[type=file]{display:none;}
 
 /* ============ APP ============ */
 .app{display:none;min-height:100vh;background:#fff;}
-.app.active{display:block;}
+.app.active{display:block;animation:fadeIn .6s ease;}
 .app__header{width:100%;padding:15px 0;position:sticky;top:0;z-index:1000;background:rgba(137,112,153,0.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.1);}
 .app__nav--container{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 5%;width:100%;flex-wrap:wrap;gap:.5rem;}
 .app__logo{display:flex;align-items:center;flex-shrink:0;font-weight:bold;color:#fff;gap:.5rem;}
-.app__logo span{font-size:1.1rem;}
+.app__logo span{font-size:1.1rem;display:flex;align-items:center;gap:.5rem;}
+.app__logo img{height:32px;width:auto;object-fit:contain;vertical-align:middle;}
 .app__nav{display:flex;list-style:none;gap:2rem;align-items:center;margin:0;padding:0;flex-wrap:wrap;}
 .app__nav-list{padding:.5rem 0;}
 .app__nav a{color:#fff;text-decoration:none;font-weight:600;font-size:.95rem;padding:.5rem 1rem;border-radius:25px;transition:all .3s ease;position:relative;font-family:"Montserrat",sans-serif;}
@@ -117,6 +119,8 @@ input[type=file]{display:none;}
 .hotel-card__btn{width:100%;padding:.875rem;background:linear-gradient(135deg,var(--violeta),var(--azul));color:#fff;border:none;border-radius:15px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;text-transform:uppercase;letter-spacing:.5px;}
 .hotel-card__btn:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(111,66,193,0.3);}
 
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
 @media(max-width:768px){
 .hero__overlay{width:90%;}
 .app__nav--container{flex-direction:column;}
@@ -158,7 +162,7 @@ input[type=file]{display:none;}
     </div>
     <div class="auth-field"><i class="fa-solid fa-envelope"></i><input type="email" id="emailLogin" placeholder="Correo Electrónico" autocomplete="off"></div>
     <div class="auth-field"><i class="fa-solid fa-key"></i><input type="password" id="passwordLogin" placeholder="Contraseña"></div>
-    <div id="loginMsg" class="msg error"></div>
+    <div id="loginMsg" class="msg"></div>
     <button onclick="login()">Iniciar sesión</button>
     <p class="back-link" onclick="showScreen('hero')">← Volver al inicio</p>
   </div>
@@ -181,7 +185,7 @@ input[type=file]{display:none;}
       <input type="file" id="docInput" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocSelected(this)">
       <div id="docOk" class="file-ok"></div>
     </div>
-    <div id="regMsg" class="msg error"></div>
+    <div id="regMsg" class="msg"></div>
     <button class="action" onclick="registrar()">Crear Cuenta</button>
     <p class="back-link" onclick="showScreen('hero')">← Volver al inicio</p>
   </div>
@@ -339,7 +343,7 @@ function onDocSelected(input) {
 const validarEmail = e => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 function showError(id, t){ const m = document.getElementById(id); m.textContent = "⚠ " + t; m.className = "msg error"; }
 function showOk(id, t){ const m = document.getElementById(id); m.textContent = "✔ " + t; m.className = "msg ok"; }
-function hideMsg(id){ const m = document.getElementById(id); if (m) m.className = "msg error"; m.style.display = "none"; setTimeout(()=>m.style.display="",50); }
+function hideMsg(id){ const m = document.getElementById(id); if (!m) return; m.className = "msg"; m.textContent = ""; }
 
 function registrar() {
   const email = document.getElementById("emailReg").value.trim();
