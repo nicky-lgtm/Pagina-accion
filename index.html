@@ -90,6 +90,28 @@ input[type=file]{display:none;}
 .filter-error{display:none;color:#c0392b;font-size:.9rem;margin-top:1rem;text-align:center;font-weight:600;font-family:"Open Sans",sans-serif;}
 .filter-error.show{display:block;}
  
+/* ============ PUBLICAR HOSPEDAJE / OFERTA (Proveedor) ============ */
+.publish{padding:2rem;display:flex;justify-content:center;}
+.publish__container{width:100%;max-width:1000px;}
+.publish-panel{background:var(--blanco);border-radius:20px;padding:1.8rem;box-shadow:0 20px 40px rgba(0,0,0,0.1);border:1px solid rgba(255,255,255,0.2);}
+.publish-panel h3{font-size:1.4rem;color:var(--titulo);margin-bottom:.3rem;}
+.publish-panel .hint{color:#888;font-size:.85rem;font-family:"Open Sans",sans-serif;margin-bottom:1.4rem;}
+.publish-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.publish__textarea{min-height:90px;resize:vertical;font-family:inherit;}
+.publish-features{margin-top:1.2rem;}
+.publish-checks{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.6rem;}
+.check-pill{display:flex;align-items:center;gap:.4rem;background:#f1f3f4;padding:.45rem .9rem;border-radius:20px;font-size:.85rem;color:#555;cursor:pointer;font-family:"Open Sans",sans-serif;transition:.2s;}
+.check-pill:has(input:checked){background:var(--violeta);color:#fff;}
+.check-pill input{accent-color:var(--violeta);}
+.mis-publicaciones{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem;}
+.mp-card{background:#f8f9fb;border-radius:14px;padding:1rem 1.2rem;border:1px solid #eceef2;}
+.mp-card__name{font-weight:700;color:var(--texto);font-size:1.05rem;}
+.mp-card__meta{font-size:.85rem;color:#777;margin:.3rem 0;font-family:"Open Sans",sans-serif;}
+.mp-card__price{color:var(--violeta);font-weight:700;}
+.mp-empty{color:#888;font-family:"Open Sans",sans-serif;font-size:.9rem;}
+.mp-delete{margin-top:.7rem;background:transparent;border:1px solid #e07a7a;color:#c0392b;padding:.35rem .9rem;border-radius:14px;font-size:.8rem;cursor:pointer;transition:.2s;font-family:"Open Sans",sans-serif;}
+.mp-delete:hover{background:#c0392b;color:#fff;}
+ 
 /* ============ HOTELES ============ */
 .hotels{padding:3rem 2rem;max-width:1400px;margin:0 auto;}
 .hotels__header{text-align:center;margin-bottom:2.5rem;}
@@ -127,6 +149,7 @@ input[type=file]{display:none;}
 .app__nav{gap:.8rem;justify-content:center;}
 .search{padding:1rem;}
 .price-panel{padding:1.2rem;}
+.publish{padding:1rem;}
 .hotels{padding:2rem 1rem;}
 .hotel-grid{grid-template-columns:1fr;gap:1rem;}
 .login__container,.registro__container{width:92%;border-radius:30px;}
@@ -191,14 +214,15 @@ input[type=file]{display:none;}
   </div>
 </section>
  
-<!-- ================= APP (CU-05) ================= -->
+<!-- ================= APP (CU-05 / CU-06 Publicar) ================= -->
 <section id="app" class="app">
   <header class="app__header">
     <div class="app__nav--container">
       <div class="app__logo"><span> <img src="logo2.png"> Security Fly</span></div>
       <ul class="app__nav">
         <li class="app__nav-list"><a href="#" onclick="mostrarCatalogo(event)">Inicio</a></li>
-        <li class="app__nav-list"><a href="#" onclick="limpiarFiltro(event)">Todos los hoteles</a></li>
+        <li class="app__nav-list nav-viajero"><a href="#" onclick="limpiarFiltro(event)">Todos los hoteles</a></li>
+        <li class="app__nav-list nav-proveedor"><a href="#" onclick="irAPublicar(event)">Publicar Hospedaje</a></li>
         <li id="sessionInfo"></li>
         <li class="app__nav-list"><a href="#" class="logout" onclick="logout()">Cerrar sesión</a></li>
       </ul>
@@ -210,7 +234,7 @@ input[type=file]{display:none;}
     <p class="app__paragraph">Tu compañero de viaje confiable</p>
   </div>
  
-  <!-- FILTRO DE PRECIO - CU-05 -->
+  <!-- FILTRO DE PRECIO - CU-05 (solo Viajero) -->
   <section class="search">
     <div class="search__container">
       <div class="price-panel">
@@ -240,6 +264,70 @@ input[type=file]{display:none;}
     </div>
   </section>
  
+  <!-- PUBLICAR HOSPEDAJE / OFERTA - CU (solo Proveedor) -->
+  <section id="publicar" class="publish hidden">
+    <div class="publish__container">
+      <div class="publish-panel">
+        <h3>Publica tu hospedaje o servicio</h3>
+        <p class="hint">Estos datos serán visibles en el catálogo para los viajeros que busquen hospedaje</p>
+ 
+        <div class="publish-grid">
+          <div class="search__field">
+            <label class="search__label" for="pubNombre">Nombre del hospedaje</label>
+            <input type="text" id="pubNombre" class="search__input" placeholder="Ej: Hotel Caribe Sunset">
+          </div>
+          <div class="search__field">
+            <label class="search__label" for="pubCiudad">Ciudad</label>
+            <select id="pubCiudad" class="search__input">
+              <option value="">Selecciona una ciudad</option>
+              <option>Cartagena</option>
+              <option>Bogotá</option>
+              <option>Medellín</option>
+              <option>Cali</option>
+              <option>Santa Marta</option>
+            </select>
+          </div>
+          <div class="search__field">
+            <label class="search__label" for="pubPrecio">Precio por noche (COP)</label>
+            <input type="number" id="pubPrecio" class="search__input" placeholder="Ej: 180000" min="0">
+          </div>
+          <div class="search__field">
+            <label class="search__label" for="pubImagen">URL de imagen (opcional)</label>
+            <input type="text" id="pubImagen" class="search__input" placeholder="https://...">
+          </div>
+        </div>
+ 
+        <div class="search__field" style="margin-top:1rem;">
+          <label class="search__label" for="pubDescripcion">Descripción</label>
+          <textarea id="pubDescripcion" class="search__input publish__textarea" placeholder="Cuéntale al viajero qué ofreces..."></textarea>
+        </div>
+ 
+        <div class="publish-features">
+          <label class="search__label">Características</label>
+          <div class="publish-checks" id="pubCaracteristicas">
+            <label class="check-pill"><input type="checkbox" value="WiFi gratis"> WiFi gratis</label>
+            <label class="check-pill"><input type="checkbox" value="Piscina"> Piscina</label>
+            <label class="check-pill"><input type="checkbox" value="Spa"> Spa</label>
+            <label class="check-pill"><input type="checkbox" value="Gimnasio"> Gimnasio</label>
+            <label class="check-pill"><input type="checkbox" value="Restaurant"> Restaurant</label>
+            <label class="check-pill"><input type="checkbox" value="Bar"> Bar</label>
+            <label class="check-pill"><input type="checkbox" value="Parking"> Parking</label>
+            <label class="check-pill"><input type="checkbox" value="Pet-friendly"> Pet-friendly</label>
+          </div>
+        </div>
+ 
+        <div id="pubMsg" class="msg"></div>
+        <button class="search__btn" style="margin-top:1.2rem;" onclick="publicarHospedaje()">Publicar</button>
+      </div>
+ 
+      <div class="publish-panel" style="margin-top:2rem;">
+        <h3>Mis publicaciones</h3>
+        <p class="hint">Hospedajes y servicios que has publicado en Security Fly</p>
+        <div id="misPublicaciones" class="mis-publicaciones"></div>
+      </div>
+    </div>
+  </section>
+ 
   <section class="hotels">
     <div class="hotels__header">
       <h2 class="hotels__title">Hospedajes en Colombia</h2>
@@ -262,15 +350,21 @@ input[type=file]{display:none;}
 /* =========================================================
    CAPA DE PERSISTENCIA (simula la base de datos)
    Entidad Usuario: {email, password, role, negocio, documento}
+   Entidad Publicacion (oferta del Proveedor): {id, proveedorEmail, negocio, nombre, ciudad, precio, imagen, descripcion, features, rating}
    ========================================================= */
-const DB_USERS = "sf_users", DB_LOCKS = "sf_locks";
+const DB_USERS = "sf_users", DB_LOCKS = "sf_locks", DB_LISTINGS = "sf_listings";
 const getUsers  = () => JSON.parse(localStorage.getItem(DB_USERS) || "[]");
 const saveUsers = u => localStorage.setItem(DB_USERS, JSON.stringify(u));
 const getLocks  = () => JSON.parse(localStorage.getItem(DB_LOCKS) || "{}");
 const saveLocks = l => localStorage.setItem(DB_LOCKS, JSON.stringify(l));
+const getListings  = () => JSON.parse(localStorage.getItem(DB_LISTINGS) || "[]");
+const saveListings = l => localStorage.setItem(DB_LISTINGS, JSON.stringify(l));
+ 
+/* Sesión actual (se llena al iniciar sesión) */
+let sesionActual = null;
  
 /* =========================================================
-   CATÁLOGO DE HOSPEDAJES (oferta de Proveedores)
+   CATÁLOGO DE HOSPEDAJES (oferta demo, simula datos previos)
    ========================================================= */
 const imagenes = ["assets/hotel1.jpg","assets/hotel2.jpg","assets/tayrona1.jpg","assets/tayrona2.jpg","assets/cano2.jpg","assets/jeep.jpg","assets/cartagena.jpg","assets/monserrate.jpg","assets/cocora.jpg","assets/hero.jpg"];
 const ciudades = ["Cartagena","Bogotá","Medellín","Cali","Santa Marta"];
@@ -303,11 +397,16 @@ let rolSeleccionado = "viajero";
 function showScreen(id) {
   ["hero","login","registro","app"].forEach(s => document.getElementById(s).classList.remove("active"));
   document.getElementById(id).classList.add("active");
-  hideMsg("loginMsg"); hideMsg("regMsg");
+  hideMsg("loginMsg"); hideMsg("regMsg"); hideMsg("pubMsg");
   document.getElementById("filterError").classList.remove("show");
   window.scrollTo(0,0);
 }
-function mostrarCatalogo(e){ e.preventDefault(); document.querySelector(".search").scrollIntoView({behavior:"smooth"}); }
+function mostrarCatalogo(e){
+  e.preventDefault();
+  const destino = rolSeleccionado === "proveedor" ? document.getElementById("publicar") : document.querySelector(".search");
+  destino.scrollIntoView({behavior:"smooth"});
+}
+function irAPublicar(e){ e.preventDefault(); document.getElementById("publicar").scrollIntoView({behavior:"smooth"}); }
 function setRole(btn) {
   btn.parentElement.querySelectorAll(".role-tab").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
@@ -395,16 +494,24 @@ function login() {
     return showError("loginMsg","Correo o contraseña incorrectos. Intenta de nuevo.");
   }
   delete locks[key]; saveLocks(locks);
+  sesionActual = { email, role: rolSeleccionado, negocio: user.negocio || "" };
   document.getElementById("sessionInfo").textContent =
     (rolSeleccionado === "proveedor" ? "🏨 " + (user.negocio || "Proveedor") : "🧳 Viajero") + " · " + email;
   document.getElementById("emailLogin").value = ""; document.getElementById("passwordLogin").value = "";
+ 
+  // Mostrar/ocultar secciones según el rol (Viajero busca, Proveedor publica)
+  document.querySelectorAll(".nav-viajero").forEach(el => el.style.display = rolSeleccionado === "viajero" ? "" : "none");
+  document.querySelectorAll(".nav-proveedor").forEach(el => el.style.display = rolSeleccionado === "proveedor" ? "" : "none");
+  document.querySelector(".search").classList.toggle("hidden", rolSeleccionado === "proveedor");
+  document.getElementById("publicar").classList.toggle("hidden", rolSeleccionado !== "proveedor");
+ 
   showScreen("app");
-  renderHoteles();
+  if (rolSeleccionado === "proveedor") { renderMisPublicaciones(); } else { renderHoteles(); }
 }
-function logout(){ showScreen("hero"); }
+function logout(){ sesionActual = null; showScreen("hero"); }
  
 /* =========================================================
-   CU-05 — BUSCAR HOSPEDAJE POR PRECIO
+   CU-05 — BUSCAR HOSPEDAJE POR PRECIO (Viajero)
    ========================================================= */
 const fmt = n => "$" + Number(n).toLocaleString("es-CO");
 function syncSliders() {
@@ -464,16 +571,91 @@ function limpiarFiltro(e){
   document.querySelector(".search").scrollIntoView({behavior:"smooth"});
 }
  
+/* =========================================================
+   CU — PUBLICAR HOSPEDAJE O SERVICIO (Proveedor)
+   ========================================================= */
+function publicarHospedaje() {
+  const nombre = document.getElementById("pubNombre").value.trim();
+  const ciudad = document.getElementById("pubCiudad").value;
+  const precioVal = document.getElementById("pubPrecio").value.trim();
+  const precio = Number(precioVal);
+  const imagen = document.getElementById("pubImagen").value.trim();
+  const descripcion = document.getElementById("pubDescripcion").value.trim();
+  const features = Array.from(document.querySelectorAll("#pubCaracteristicas input:checked")).map(c => c.value);
+ 
+  if (!sesionActual || sesionActual.role !== "proveedor")
+    return showError("pubMsg","Debes iniciar sesión como proveedor para publicar.");
+  // E1: nombre obligatorio
+  if (!nombre) return showError("pubMsg","Ingresa el nombre del hospedaje o servicio.");
+  // E2: ciudad obligatoria
+  if (!ciudad) return showError("pubMsg","Selecciona la ciudad donde ofreces el servicio.");
+  // E3: precio inválido
+  if (precioVal === "" || isNaN(precio) || precio <= 0)
+    return showError("pubMsg","Ingresa un precio válido, mayor a 0.");
+ 
+  const listings = getListings();
+  listings.push({
+    id: Date.now(),
+    proveedorEmail: sesionActual.email,
+    negocio: sesionActual.negocio,
+    nombre, ciudad, precio, imagen, descripcion, features,
+    rating: (4 + Math.random()).toFixed(1)
+  });
+  saveListings(listings);
+  showOk("pubMsg","¡Publicado con éxito! Ya aparece en el catálogo para los viajeros.");
+ 
+  ["pubNombre","pubPrecio","pubImagen","pubDescripcion"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("pubCiudad").value = "";
+  document.querySelectorAll("#pubCaracteristicas input:checked").forEach(c => c.checked = false);
+ 
+  renderMisPublicaciones();
+}
+ 
+function renderMisPublicaciones() {
+  const cont = document.getElementById("misPublicaciones");
+  if (!sesionActual) { cont.innerHTML = ""; return; }
+  const mias = getListings().filter(l => l.proveedorEmail === sesionActual.email);
+  if (!mias.length) {
+    cont.innerHTML = '<p class="mp-empty">Aún no has publicado ningún hospedaje o servicio.</p>';
+    return;
+  }
+  cont.innerHTML = mias.map(l => `
+    <div class="mp-card">
+      <div class="mp-card__name">${l.nombre}</div>
+      <div class="mp-card__meta">📍 ${l.ciudad} · ★ ${l.rating}/5</div>
+      <div class="mp-card__price">${fmt(l.precio)} COP/noche</div>
+      <button class="mp-delete" onclick="eliminarPublicacion(${l.id})">Eliminar publicación</button>
+    </div>
+  `).join("");
+}
+function eliminarPublicacion(id) {
+  saveListings(getListings().filter(l => l.id !== id));
+  renderMisPublicaciones();
+}
+ 
+/* =========================================================
+   RENDER CATÁLOGO (mezcla demo + publicaciones de proveedores)
+   ========================================================= */
 function renderHoteles() {
-  let visibles = hoteles;
+  const publicados = getListings().map(l => ({
+    nombre: l.nombre,
+    ciudad: l.ciudad,
+    precio: l.precio,
+    rating: l.rating,
+    features: (l.features && l.features.length) ? l.features : ["Publicado por proveedor"],
+    imagen: l.imagen,
+    esProveedor: true
+  }));
+  let visibles = publicados.concat(hoteles);
   if (ciudadActual !== "all") visibles = visibles.filter(h => h.ciudad === ciudadActual);
   if (rangoPrecio) visibles = visibles.filter(h => h.precio >= rangoPrecio.min && h.precio <= rangoPrecio.max);
   document.getElementById("noResults").classList.toggle("show", visibles.length === 0);
   document.getElementById("hotel-list").innerHTML = visibles.map((h,i) => {
-    const badge = h.rating >= 4.5 ? "Premium" : h.rating >= 4.0 ? "Popular" : "Buena opción";
+    const badge = h.esProveedor ? "Publicado por proveedor" : (h.rating >= 4.5 ? "Premium" : h.rating >= 4.0 ? "Popular" : "Buena opción");
+    const img = (h.imagen && h.imagen.trim()) ? h.imagen : imagenes[i % imagenes.length];
     return `<div class="hotel-card">
       <div class="hotel-card__image">
-        <img src="${imagenes[i % imagenes.length]}" alt="${h.nombre}">
+        <img src="${img}" alt="${h.nombre}">
         <div class="hotel-card__badge">${badge}</div>
       </div>
       <div class="hotel-card__content">
