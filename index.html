@@ -129,6 +129,7 @@ input[type=file]{display:none;}
 }
 </style>
 <base target="_blank">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -145,15 +146,15 @@ input[type=file]{display:none;}
 
 <!-- ================= LOGIN (CU-03 / CU-04) ================= -->
 <section id="login" class="login">
-  <img src="assets/monserrate.jpg" alt="Monserrate, Bogotá" class="login__img">
+  <img src="https://images.pexels.com/photos/11815937/pexels-photo-11815937.jpeg" alt="Monserrate, Bogotá" class="login__img">
   <div class="login__container">
     <h2 class="subtitle">Iniciar sesión</h2>
     <div class="role-tabs">
       <button class="role-tab active" data-role="viajero" onclick="setRole(this)">Viajero</button>
       <button class="role-tab" data-role="proveedor" onclick="setRole(this)">Proveedor</button>
     </div>
-    <div class="auth-field"><i>✉</i><input type="email" id="emailLogin" placeholder="Correo Electrónico" autocomplete="off"></div>
-    <div class="auth-field"><i>🔑</i><input type="password" id="passwordLogin" placeholder="Contraseña"></div>
+    <div class="auth-field"><i class="fa-solid fa-envelope"></i><input type="email" id="emailLogin" placeholder="Correo Electrónico" autocomplete="off"></div>
+    <div class="auth-field"><i class="fa-solid fa-key"></i><input type="password" id="passwordLogin" placeholder="Contraseña"></div>
     <div id="loginMsg" class="msg error"></div>
     <button onclick="login()">Iniciar sesión</button>
     <p class="back-link" onclick="showScreen('hero')">← Volver al inicio</p>
@@ -162,18 +163,18 @@ input[type=file]{display:none;}
 
 <!-- ================= REGISTRO (CU-01 / CU-02) ================= -->
 <section id="registro" class="registro">
-  <img src="assets/cartagena.jpg" alt="Cartagena" class="registro__img">
+  <img src="https://images.pexels.com/photos/26600364/pexels-photo-26600364.jpeg" alt="Cartagena" class="registro__img">
   <div class="registro__container">
     <h2 class="subtitle">Crear cuenta</h2>
     <div class="role-tabs">
       <button class="role-tab active" data-role="viajero" onclick="setRole(this)">Viajero</button>
       <button class="role-tab" data-role="proveedor" onclick="setRole(this)">Proveedor</button>
     </div>
-    <div id="negocioRow" class="auth-field hidden"><i>🏨</i><input type="text" id="nombreNegocio" placeholder="Nombre del Negocio"></div>
-    <div class="auth-field"><i>✉</i><input type="email" id="emailReg" placeholder="Correo Electrónico" autocomplete="off"></div>
-    <div class="auth-field"><i>👤</i><input type="password" id="passwordReg" placeholder="Contraseña (mín. 8 caracteres)"></div>
+    <div id="negocioRow" class="auth-field hidden"><i class="fa-solid fa-city"></i><input type="text" id="nombreNegocio" placeholder="Nombre del Negocio"></div>
+    <div class="auth-field"><i class="fa-solid fa-envelope"></i><input type="email" id="emailReg" placeholder="Correo Electrónico" autocomplete="off"></div>
+    <div class="auth-field"><i class="fa-solid fa-user"></i><input type="password" id="passwordReg" placeholder="Contraseña (mín. 8 caracteres)"></div>
     <div>
-      <label class="file-btn" for="docInput">📄 <span id="docLabel">Cargar Documento de Identidad</span></label>
+      <label class="file-btn" for="docInput"><i class="fa-solid fa-book"></i> <span id="docLabel">Cargar Documento de Identidad</span></label>
       <input type="file" id="docInput" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocSelected(this)">
       <div id="docOk" class="file-ok"></div>
     </div>
@@ -187,7 +188,7 @@ input[type=file]{display:none;}
 <section id="app" class="app">
   <header class="app__header">
     <div class="app__nav--container">
-      <div class="app__logo"><span>✈ Secure Fly</span></div>
+      <div class="app__logo"><span> <img src="logo2.png"> Security Fly</span></div>
       <ul class="app__nav">
         <li class="app__nav-list"><a href="#" onclick="mostrarCatalogo(event)">Inicio</a></li>
         <li class="app__nav-list"><a href="#" onclick="limpiarFiltro(event)">Todos los hoteles</a></li>
@@ -198,7 +199,7 @@ input[type=file]{display:none;}
   </header>
 
   <div class="app__banner">
-    <h2 class="app__subtitle">Bienvenido a Secure Fly</h2>
+    <h2 class="app__subtitle">Bienvenido a Security Fly</h2>
     <p class="app__paragraph">Tu compañero de viaje confiable</p>
   </div>
 
