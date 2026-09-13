@@ -1,431 +1,416 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagina de Viajes</title>
-  <link rel="stylesheet" href="style.css">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-    rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <style>
-    i {
-      font-size: 1.8rem;
-      margin-left: 10px;
-    }
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Fly - CU-01 a CU-05</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{padding:0;margin:0;box-sizing:border-box;font-family:"Montserrat",sans-serif;}
+html,body{overflow-x:hidden;}
+:root{--blanco:#fafafa;--violeta:#7E80FF;--naranja:#FFD28F;--azul:#4C5EFF;--hover:#FF8F5C;--titulo:#2C2C2C;--texto:#6B6B6B;--verde:#28a745;}
+.screen{min-height:100vh;display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;color:#fff;}
+.screen.active{display:flex;}
+.hero{background:linear-gradient(135deg,#2b2d5e 0%,#4C5EFF 50%,#7E80FF 100%);}
+.overlay-card{width:clamp(270px,60%,800px);padding:2.5rem 2rem;background:rgba(63,63,63,0.4);backdrop-filter:blur(9px);border-radius:20px;box-shadow:0 0 70px rgba(0,0,0,0.7);z-index:1;}
+.title{font-size:clamp(2rem,4rem,6rem);margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,0.7);}
+.paragraph{font-size:1.5rem;margin-bottom:2rem;text-shadow:1px 1px 3px rgba(0,0,0,0.7);font-family:"Open Sans",sans-serif;color:#f0f0f0;}
+.btn{font-weight:bold;border:none;padding:10px 20px;margin:10px;border-radius:22px;cursor:pointer;font-size:1rem;font-family:"Montserrat",sans-serif;transition:all .3s ease;}
+.btn--primary{background:var(--verde);color:#fff;}
+.btn--ghost{background:transparent;color:#fff;border:2px solid #fff;}
+.btn:hover{transform:scale(1.05);}
+.auth-box{width:clamp(300px,60%,700px);padding:2rem;border-radius:24px;background:rgba(90,90,90,0.35);backdrop-filter:blur(9px);box-shadow:0 6px 20px rgba(0,0,0,0.3);font-size:larger;}
+.auth-box h2{font-size:clamp(1.4rem,2.4rem,3rem);margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,0.7);font-family:"Open Sans",sans-serif;color:#f0f0f0;}
+.role-tabs{display:flex;gap:.6rem;justify-content:center;margin-bottom:1.2rem;}
+.role-tab{padding:.5rem 1.4rem;border-radius:20px;border:2px solid #fff;background:transparent;color:#fff;font-weight:700;cursor:pointer;transition:.3s;}
+.role-tab.active{background:var(--verde);border-color:var(--verde);}
+.field-row{display:flex;align-items:center;gap:.6rem;justify-content:center;margin:.7rem 0;}
+.field-row i{width:20px;color:#fff;}
+.auth-box input[type=text],.auth-box input[type=email],.auth-box input[type=password],.auth-box input[type=number]{
+all:unset;display:inline-block;width:min(70%,420px);margin:6px 0;border-bottom:2px solid #fff;font-family:"Open Sans",sans-serif;transition:.4s;color:#f0f0f0;text-align:left;}
+.auth-box input:focus{border-bottom:2px solid var(--verde);}
+.auth-box input::placeholder{color:#e8e8e8;}
+input[type=file]{display:none;}
+.file-btn{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.15);border:2px dashed #fff;color:#fff;padding:.6rem 1.2rem;border-radius:12px;cursor:pointer;font-size:.95rem;transition:.3s;}
+.file-btn:hover{background:rgba(255,255,255,.3);}
+.file-ok{color:#7CFC9A;font-size:.9rem;margin-top:.4rem;}
+.msg{display:none;margin:.8rem auto 0;padding:.7rem 1rem;border-radius:10px;font-size:.95rem;max-width:480px;font-family:"Open Sans",sans-serif;}
+.msg.error{display:block;background:rgba(220,53,69,.9);color:#fff;}
+.msg.ok{display:block;background:rgba(40,167,69,.9);color:#fff;}
+.back-link{margin-top:1rem;color:#ddd;font-size:.9rem;cursor:pointer;text-decoration:underline;}
+/* APP */
+.app-screen{min-height:100vh;display:none;background:linear-gradient(180deg,rgba(126,128,255,.18) 0%,#fff 40%);}
+.app-screen.active{display:block;}
+.app-header{width:100%;padding:15px 0;position:sticky;top:0;z-index:1000;background:rgba(126,128,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.1);}
+.app-nav{display:flex;list-style:none;gap:2rem;align-items:center;justify-content:center;flex-wrap:wrap;}
+.app-logo{display:flex;align-items:center;font-weight:800;color:#fff;gap:.5rem;}
+.app-nav a{color:#fff;text-decoration:none;font-weight:600;font-size:.95rem;padding:.5rem 1rem;border-radius:25px;transition:.3s;}
+.app-nav a:hover{background:rgba(255,255,255,.15);}
+.app-nav a.logout{background:rgba(220,53,69,.8);}
+.app-welcome{text-align:center;padding:3rem 1rem;color:var(--titulo);}
+.app-welcome h2{font-size:clamp(1.6rem,3rem,3.5rem);background:linear-gradient(135deg,var(--violeta),var(--azul));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.app-welcome p{color:#666;font-size:1.1rem;margin-top:.5rem;}
+.hotels{padding:1rem 2rem 4rem;max-width:1400px;margin:0 auto;}
+.hotels__header{text-align:center;margin-bottom:2rem;}
+.hotels__title{font-size:2.4rem;background:linear-gradient(135deg,var(--violeta),var(--azul));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hotels__subtitle{color:#666;max-width:600px;margin:0 auto;}
+/* Filtro de precio (CU-05) */
+.price-filter{background:var(--blanco);border-radius:20px;padding:1.5rem;box-shadow:0 10px 30px rgba(0,0,0,.08);max-width:820px;margin:0 auto 2.5rem;}
+.price-filter h3{color:var(--texto);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;justify-content:center;}
+.price-inputs{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;}
+.price-inputs label{display:flex;flex-direction:column;font-size:.85rem;color:#666;gap:.3rem;text-align:left;}
+.price-inputs input{padding:.7rem;border:2px solid #e1e5e9;border-radius:12px;font-size:1rem;width:160px;font-family:inherit;color:#333;}
+.price-inputs input:focus{outline:none;border-color:var(--hover);}
+.price-slider-row{display:flex;align-items:center;gap:1rem;justify-content:center;color:#666;font-size:.9rem;margin-bottom:1.2rem;}
+.price-slider-row input[type=range]{width:min(60%,360px);accent-color:var(--violeta);}
+.btn-apply{background:linear-gradient(135deg,var(--violeta),var(--azul));color:#fff;border:none;padding:.8rem 2rem;border-radius:15px;font-weight:700;cursor:pointer;transition:.3s;}
+.btn-apply:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 5px 15px rgba(76,94,255,.35);}
+.btn-apply:disabled{background:#aaa;cursor:not-allowed;}
+.filter-error{display:none;color:#c0392b;font-size:.9rem;margin-top:.8rem;font-weight:600;}
+.filter-error.show{display:block;}
+.no-results{display:none;background:#fff3cd;border:1px solid #ffeaa7;color:#856404;padding:1.2rem;border-radius:12px;text-align:center;max-width:600px;margin:1rem auto;}
+.no-results.show{display:block;}
+.hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;}
+.hotel-card{background:var(--blanco);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.1);transition:.3s;}
+.hotel-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.15);}
+.hotel-card__image{height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;}
+.hotel-card__badge{position:absolute;top:1rem;right:1rem;background:linear-gradient(135deg,var(--violeta),var(--azul));color:#fff;padding:.4rem 1rem;border-radius:20px;font-size:.8rem;font-weight:700;}
+.hotel-card__content{padding:1.4rem;}
+.hotel-card__name{font-size:1.3rem;color:var(--titulo);}
+.hotel-card__city{color:#666;font-size:.9rem;margin:.4rem 0 1rem;}
+.hotel-card__info{display:flex;justify-content:space-between;align-items:center;}
+.hotel-card__rating{color:var(--hover);font-weight:700;}
+.hotel-card__price-amount{font-size:1.25rem;font-weight:800;color:var(--violeta);}
+.hotel-card__price-label{font-size:.8rem;color:#666;text-align:right;}
+.hotel-card__features{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;}
+.hotel-card__feature{padding:.25rem .75rem;background:#f1f3f4;border-radius:15px;font-size:.78rem;color:#666;}
+.hotel-card__btn{width:100%;margin-top:1.2rem;padding:.8rem;background:linear-gradient(135deg,var(--violeta),var(--azul));color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;transition:.3s;}
+.hotel-card__btn:hover{transform:translateY(-2px);}
+.hotel-card.hidden-by-price{display:none;}
+@media(max-width:600px){.app-nav{gap:.8rem;}.price-inputs input{width:120px;}}
+</style>
+<base target="_blank">
 </head>
-
 <body>
-  <div class="screen__active">
-    <div class="hero">
 
-      <div class="hero__overlay">
-        <h1 class="title">Explora tu viaje en Colombia</h1>
-        <p class="paragraph">Encuentra tu próximo destino de viaje</p>
-        <button class="hero__btn hero__btn--iniciar">Iniciar sesión</button>
-        <button class="hero__btn hero__btn--crear">Crear cuenta</button>
-      </div>
-      <img src="hero4.jpg" alt="Imagen de un paisaje" class="hero__img">
-    </div>
-  </div>
-  <!-- INICIO -->
-  <div class="screen__login">
-    <div class="login" id="login" style="display:none;">
-      <div class="login__container">
-        <h2 class="subtitle">Iniciar sesión</h2>
-        <form>
-          <i class="fa-solid fa-user"></i>
-          <label for="emailLogin"></label>
-          <input type="email" id="emailLogin" name="emailLogin" required placeholder="Correo Electronico"><br><br>
-          <i class="fa-solid fa-key"></i>
-          <label for="passwordLogin"></label>
-          <input type="password" id="passwordLogin" name="passwordLogin" required placeholder="Contraseña"><br><br>
-          <label for="rememberLogin"></label>
-          <input type="checkbox" id="rememberLogin" name="rememberLogin" required placeholder="Contraseña"> Recordar
-          Contraseña <br><br>
-          <p>¿Olvidaste tu Contraseña?</p>
-        </form>
-
-        <button id="btnLoginContinuar">Iniciar sesión</button>
-      </div>
-      <img src="hero6.jpg" alt="Imagen de un paisaje" class="login__img">
-    </div>
-  </div>
-  <!-- REGISTRO -->
-  <div class="screen__registro"></div>
-  <div class="registro" id="registro" style="display:none;">
-    <div class="registro__container">
-      <h2 class="subtitle">Crear cuenta</h2>
-
-      <form>
-        <i class="fa-solid fa-user"></i>
-        <label for="nombre"></label>
-        <input type="text" id="nombre" name="nombre" required placeholder="Nombre de Usuario"><br><br>
-        <i class="fa-solid fa-envelope"></i>
-        <label for="email"></label>
-        <input type="email" id="email" name="email" required placeholder="Correo Electronico"><br><br>
-        <i class="fa-solid fa-key"></i>
-        <label for="password"></label>
-        <input type="password" id="password" name="password" required placeholder="Contraseña"><br><br>
-      </form>
-      <button id="btnRegistroContinuar">Crear Cuenta</button>
-    </div>
-    <img src="hero5.jpg" alt="Imagen de un paisaje" class="registro__img">
-  </div>
-
-  <div class="screen__app">
-    <div class="app" id="app" style="display:none;">
-      <header class="app__header">
-        <nav class="app__nav--container">
-
-          <ul class="app__nav">
-
-            <li class="app__logo">
-             <span> Secure Fly</span>
-              <img src="logo2.png" alt="Logo de la app" class="app__logo--img">
-            </li>
-
-            <li class="app__nav-list">
-
-              <a href="#" data-section="inicio"> <i class="fa-solid fa-house"></i><span>Inicio</span></a>
-            </li>
-
-            <li class="app__nav-list">
-
-              <a href="#" data-section="clima"><i class="fa-solid fa-cloud"></i>
-                <span>Clima</span></a>
-            </li>
-
-            <li class="app__nav-list">
-
-              <a href="#" data-section="eventos"> <i class="fa-solid fa-globe"></i><span>Eventos</span></a>
-            </li>
-
-            <li class="app__nav-list">
-
-              <a href="#" data-section="noticias">
-                <i class="fa-solid fa-comments"></i> <span>Noticias</span></a>
-            </li>
-<li class="app__nav-list">
-  <a href="#" data-section="gastronomia"><i class="fa-solid fa-utensils"></i><span>Gastronomía</span></a>
-</li>
-            <li class="app__nav-list">
-
-
-              <a href="#" data-section="perfil">
-                <i class="fa-solid fa-user"></i><span>Perfil</span></a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <div class="app__content">
-        <h2 class="app__subtitle">Bienvenido a Secure Fly</h2>
-        <p class="app__paragraph">Tu compañero de viaje confiable</p>
-      </div>
-    </div>
-
-    <section class="search" style="display: none;">
-      <div class="search__container">
-        <form action="#" class="search__form" role="search">
-
-          <div class="search__field">
-            <label for="destination" class="search__label">¿A dónde quieres ir?</label>
-            <input type="text" id="destination" name="destination" class="search__input search__input--destination"
-              placeholder="Buscar destinos, hospedaje, hoteles..." required autocomplete="off"
-              aria-describedby="destination-help">
-            <small id="destination-help" class="search__help">Ingresa ciudad, hotel o lugar de interés</small>
-          </div>
-
-
-          <div class="search__dates">
-
-            <div class="search__field search__field--date">
-              <label for="checkin" class="search__label">Fecha de llegada</label>
-              <input type="date" id="checkin" name="checkin" class="search__input search__input--date" required min=""
-                aria-describedby="checkin-help">
-              <small id="checkin-help" class="search__help">Fecha de entrada</small>
-            </div>
-
-
-            <div class="search__field search__field--date">
-              <label for="checkout" class="search__label">Fecha de salida</label>
-              <input type="date" id="checkout" name="checkout" class="search__input search__input--date" required min=""
-                aria-describedby="checkout-help">
-              <small id="checkout-help" class="search__help">Fecha de salida</small>
-            </div>
-          </div>
-
-          <div class="search__field search__field--guests">
-            <label for="guests" class="search__label">Huéspedes</label>
-            <select id="guests" name="guests" class="search__input search__input--select"
-              aria-describedby="guests-help">
-              <option value="1">1 huésped</option>
-              <option value="2" selected>2 huéspedes</option>
-              <option value="3">3 huéspedes</option>
-              <option value="4">4 huéspedes</option>
-              <option value="5">5+ huéspedes</option>
-            </select>
-            <small id="guests-help" class="search__help">Número de personas</small>
-          </div>
-
-
-          <button type="submit" class="search__btn" aria-label="Buscar hospedaje">
-            <svg class="search__btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2">
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="M21 21l-4.35-4.35"></path>
-            </svg>
-            Buscar
-          </button>
-        </form>
-      </div>
-    </section>
-    <section class="hotels" style="display: none;">
-      <div class="hotels__header">
-        <h2 class="hotels__title">Hoteles en Colombia</h2>
-        <p class="hotels__subtitle">Descubre los mejores destinos y hospedajes en el país más acogedor de Sudamérica</p>
-      </div>
-
-      <div class="hotels__filters">
-        <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="Cartagena">Cartagena</button>
-        <button class="filter-btn" data-filter="Bogotá">Bogotá</button>
-        <button class="filter-btn" data-filter="Medellín">Medellín</button>
-        <button class="filter-btn" data-filter="Cali">Cali</button>
-        <button class="filter-btn" data-filter="Santa Marta">Santa Marta</button>
-      </div>
-
-      <div id="hotel-list" class="hotel-grid"></div>
-
-      <div class="hotels__load-more">
-        <button class="load-more-btn" onclick="cargarMasHoteles()">Cargar más hoteles</button>
-      </div>
-    </section>
-
-
-    <section class="weather" style="display: none;">
-      <div class="weather__container">
-        <h2 class="weather__title">Clima en Colombia</h2>
-        <p class="weather__subtitle">Consulta el clima actual y el pronóstico para tus destinos favoritos</p>
-
-        <div class="weather__search">
-          <input type="text" id="ciudad" placeholder="Escribe una ciudad..." class="weather__input">
-          <button onclick="buscarClima()" class="weather__btn">Buscar clima</button>
-        </div>
-
-        <div id="clima" class="weather__grid">
-        </div>
-
-        <div class="weather__info">
-          <div class="weather__info-card">
-            <h3><i class="fa-solid fa-sun"></i> Temperaturas ideales para viajar</h3>
-            <ul>
-              <li><strong>Playa:</strong> 25-30°C (Cartagena, Santa Marta)</li>
-              <li><strong>Ciudad:</strong> 18-25°C (Bogotá, Medellín)</li>
-              <li><strong>Montaña:</strong> 10-20°C (Villa de Leyva, Manizales)</li>
-            </ul>
-          </div>
-
-          <div class="weather__info-card">
-            <h3><i class="fa-solid fa-cloud-sun-rain"></i> Épocas del año</h3>
-            <ul>
-              <li><strong>Temporada seca:</strong> Dic-Mar, Jul-Ago</li>
-              <li><strong>Temporada lluviosa:</strong> Abr-Jun, Sep-Nov</li>
-              <li><strong>Mejor época:</strong> Dic-Feb (menos lluvia)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="events" style="display: none;">
-      <header>
-        <h1 class="title-events">Viajes en Bogotá</h1>
-        <p class="subtitle__events">Descubre los mejores eventos en la capital</p>
-      </header>
-
-      <div class="events__filters">
-        <input type="text" id="buscarEventos" class="search-box" placeholder="Buscar eventos...">
-
-        <select id="filtroCategoria" class="category-filter">
-          <option value="">Todas las categorías</option>
-          <option value="Música"> Música</option>
-          <option value="Cultural">Cultural</option>
-          <option value="Entretenimiento">Entretenimiento</option>
-          <option value="Educación"> Educación</option>
-          <option value="Deportes">Deportes</option>
-          <option value="Gastronomía"></i> Gastronomía</option>
-          <option value="Arte"> Arte</option>
-          <option value="Danza"> Danza</option>
-        </select>
-      </div>
-
-      <div id="loading" class="loading" style="display: none;">
-        Cargando eventos increíbles...
-      </div>
-
-      <div id="eventosContainer" class="eventos-grid"></div>
-
-      <div id="noEventos" class="no-eventos" style="display: none;">
-        No se encontraron eventos
-      </div>
-    </section>
-    <section class="news" style="display: none;">
-      <div class="news__header">
-        <h2 class="news__title">Noticias de Turismo</h2>
-        <p class="news__subtitle">Mantente informado sobre las últimas novedades del sector turístico en Colombia</p>
-      </div>
-
-      <div class="news__filters">
-        <button class="news-filter-btn active" data-category="all">Todas</button>
-        <button class="news-filter-btn" data-category="destinos">Destinos</button>
-        <button class="news-filter-btn" data-category="seguridad">Seguridad</button>
-        <button class="news-filter-btn" data-category="eventos">Eventos</button>
-        <button class="news-filter-btn" data-category="economia">Economía</button>
-      </div>
-
-      <div class="news__grid" id="news-grid">
-      </div>
-
-      <div class="news__load-more">
-        <button class="load-more-news-btn" onclick="cargarMasNoticias()">Ver más noticias</button>
-      </div>
-    </section>
-    <section class="gastronomia" style="display: none;">
-  <div class="gastronomia__header">
-    <h2 class="gastronomia__title">Gastronomía Colombiana</h2>
-    <p class="gastronomia__subtitle">Descubre los sabores únicos de cada región de Colombia</p>
-  </div>
-
-  <div class="gastronomia__filters">
-    <button class="region-btn active" data-region="all">Todas</button>
-    <button class="region-btn" data-region="Caribe">Caribe</button>
-    <button class="region-btn" data-region="Andina">Andina</button>
-    <button class="region-btn" data-region="Pacífica">Pacífica</button>
-    <button class="region-btn" data-region="Amazónica">Amazónica</button>
-  </div>
-
-  <div class="gastronomia__grid" id="gastronomia-grid"></div>
-</section>
-
-<section class="profile" style="display: none;">
-  <div class="profile__header">
-    <div class="profile__avatar"><i class="fa-solid fa-user"></i></div>
-    <h2 class="profile__name">Viajero Colombiano</h2>
-    <p class="profile__email">viajero@securefly.com</p>
-  </div>
-
-  <div class="profile__content">
-    <div class="profile__card">
-      <h3 class="profile__card-title"><i class="fa-solid fa-chart-line"></i> Estadísticas</h3>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Viajes Realizados</span>
-        <span class="profile__stat-value">12</span>
-      </div>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Ciudades Visitadas</span>
-        <span class="profile__stat-value">8</span>
-      </div>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Hoteles Reservados</span>
-        <span class="profile__stat-value">15</span>
-      </div>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Puntos Acumulados</span>
-        <span class="profile__stat-value">2,450</span>
-      </div>
-    </div>
-
-    <div class="profile__card">
-      <h3 class="profile__card-title"><i class="fa-solid fa-heart"></i> Favoritos</h3>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Destinos Guardados</span>
-        <span class="profile__stat-value">5</span>
-      </div>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Hoteles Favoritos</span>
-        <span class="profile__stat-value">7</span>
-      </div>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Eventos Marcados</span>
-        <span class="profile__stat-value">3</span>
-      </div>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Platos Probados</span>
-        <span class="profile__stat-value">18</span>
-      </div>
-    </div>
-
-    <div class="profile__card">
-      <h3 class="profile__card-title"><i class="fa-solid fa-star"></i> Membresía</h3>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Nivel</span>
-        <span class="profile__stat-value">Gold</span>
-      </div>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Desde</span>
-        <span class="profile__stat-value">Ene 2024</span>
-      </div>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Descuento</span>
-        <span class="profile__stat-value">15%</span>
-      </div>
-      <div class="profile__stat">
-        <span class="profile__stat-label">Próximo Nivel</span>
-        <span class="profile__stat-value">550 pts</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="profile__actions">
-    <button class="profile__action-btn">
-      <i class="fa-solid fa-pen"></i> Editar Perfil
-    </button>
-    <button class="profile__action-btn secondary">
-      <i class="fa-solid fa-clock"></i> Historial de Viajes
-    </button>
-    <button class="profile__action-btn">
-      <i class="fa-solid fa-bell"></i> Notificaciones
-    </button>
-    <button class="profile__action-btn secondary">
-      <i class="fa-solid fa-gear"></i> Configuración
-    </button>
-  </div>
-
-  <div class="profile__preferences">
-    <h3 class="profile__preferences-title">Preferencias</h3>
-    <div class="profile__preference-item">
-      <span class="profile__preference-label">Recibir notificaciones por email</span>
-      <div class="profile__toggle active"></div>
-    </div>
-    <div class="profile__preference-item">
-      <span class="profile__preference-label">Ofertas y promociones</span>
-      <div class="profile__toggle active"></div>
-    </div>
-    <div class="profile__preference-item">
-      <span class="profile__preference-label">Recordatorios de viaje</span>
-      <div class="profile__toggle"></div>
-    </div>
-    <div class="profile__preference-item">
-      <span class="profile__preference-label">Modo oscuro</span>
-      <div class="profile__toggle"></div>
-    </div>
+<!-- ================= HERO ================= -->
+<section id="hero" class="screen hero active">
+  <div class="overlay-card">
+    <h1 class="title">Explora tu viaje en Colombia</h1>
+    <p class="paragraph">Encuentra tu próximo destino de viaje con Security Fly</p>
+    <button class="btn btn--primary" onclick="showScreen('login')">Iniciar sesión</button>
+    <button class="btn btn--ghost" onclick="showScreen('registro')">Crear cuenta</button>
   </div>
 </section>
- 
 
-    <script src="script.js"></script>
+<!-- ================= LOGIN (CU-03 / CU-04) ================= -->
+<section id="login" class="screen hero">
+  <div class="auth-box">
+    <h2>Iniciar sesión</h2>
+    <div class="role-tabs">
+      <button class="role-tab active" data-role="viajero" onclick="setRole(this)">Viajero</button>
+      <button class="role-tab" data-role="proveedor" onclick="setRole(this)">Proveedor</button>
+    </div>
+    <div class="field-row"><i>✉️</i><input type="email" id="emailLogin" placeholder="Correo electrónico" autocomplete="off"></div>
+    <div class="field-row"><i>🔑</i><input type="password" id="passwordLogin" placeholder="Contraseña"></div>
+    <div id="loginMsg" class="msg error"></div>
+    <button class="btn btn--primary" style="width:min(70%,300px);margin-top:1.2rem;" onclick="login()">Ingresar</button>
+    <p class="back-link" onclick="showScreen('hero')">← Volver al inicio</p>
+  </div>
+</section>
+
+<!-- ================= REGISTRO (CU-01 / CU-02) ================= -->
+<section id="registro" class="screen hero">
+  <div class="auth-box">
+    <h2>Crear cuenta</h2>
+    <div class="role-tabs">
+      <button class="role-tab active" data-role="viajero" onclick="setRole(this)">Viajero</button>
+      <button class="role-tab" data-role="proveedor" onclick="setRole(this)">Proveedor</button>
+    </div>
+    <div id="negocioRow" class="field-row" style="display:none;"><i>🏨</i><input type="text" id="nombreNegocio" placeholder="Nombre del negocio"></div>
+    <div class="field-row"><i>✉️</i><input type="email" id="emailReg" placeholder="Correo electrónico" autocomplete="off"></div>
+    <div class="field-row"><i>👤</i><input type="password" id="passwordReg" placeholder="Contraseña (mín. 8 caracteres)"></div>
+    <div style="margin-top:1rem;">
+      <label class="file-btn" for="docInput">📄 <span id="docLabel">Cargar documento de identidad</span></label>
+      <input type="file" id="docInput" accept=".pdf,.jpg,.jpeg,.png" onchange="onDocSelected(this)">
+      <div id="docOk" class="file-ok"></div>
+    </div>
+    <div id="regMsg" class="msg error"></div>
+    <button id="btnCrearCuenta" class="btn btn--primary" style="width:min(70%,300px);margin-top:1.2rem;" onclick="registrar()">Crear Cuenta</button>
+    <p class="back-link" onclick="showScreen('hero')">← Volver al inicio</p>
+  </div>
+</section>
+
+<!-- ================= APP (CU-05) ================= -->
+<section id="app" class="app-screen">
+  <header class="app-header">
+    <ul class="app-nav">
+      <li class="app-logo">✈️ <span>Secure Fly</span></li>
+      <li><a href="#" onclick="mostrarCatalogo(event)">Inicio</a></li>
+      <li id="sessionInfo" style="color:#fff;font-size:.85rem;"></li>
+      <li><a href="#" class="logout" onclick="logout()">Cerrar sesión</a></li>
+    </ul>
+  </header>
+  <div class="app-welcome">
+    <h2>Bienvenido a Secure Fly</h2>
+    <p>Tu compañero de viaje confiable</p>
+  </div>
+  <section class="hotels">
+    <div class="hotels__header">
+      <h2 class="hotels__title">Hospedajes en Colombia</h2>
+      <p class="hotels__subtitle">Ajusta el filtro a tu presupuesto y encuentra tu hospedaje ideal</p>
+    </div>
+
+    <!-- FILTRO DE PRECIO - CU-05 -->
+    <div class="price-filter">
+      <h3>💰 Filtros de Precio</h3>
+      <div class="price-inputs">
+        <label>Presupuesto mínimo (COP)
+          <input type="number" id="precioMin" placeholder="Ej: 100000" min="0" oninput="syncSliders()">
+        </label>
+        <label>Presupuesto máximo (COP)
+          <input type="number" id="precioMax" placeholder="Ej: 300000" min="0" oninput="syncSliders()">
+        </label>
+      </div>
+      <div class="price-slider-row">
+        <span>Mín: <strong id="lblMin">$0</strong></span>
+        <input type="range" id="sliderMin" min="0" max="500000" step="10000" value="0" oninput="syncInputs()">
+      </div>
+      <div class="price-slider-row">
+        <span>Máx: <strong id="lblMax">$500.000</strong></span>
+        <input type="range" id="sliderMax" min="0" max="500000" step="10000" value="500000" oninput="syncInputs()">
+      </div>
+      <button id="btnAplicar" class="btn-apply" onclick="aplicarFiltro()">Aplicar Filtro</button>
+      <div id="filterError" class="filter-error"></div>
+    </div>
+
+    <div id="noResults" class="no-results">No se encontraron resultados para este presupuesto, intenta con un rango mayor.</div>
+    <div id="hotel-list" class="hotel-grid"></div>
+  </section>
+</section>
+
+<script>
+/* =========================================================
+   CAPA DE PERSISTENCIA (simula la base de datos)
+   Entidades: Usuario {email, password, role, negocio, documento}
+   ========================================================= */
+const DB_USERS = "sf_users";
+const DB_LOCKS = "sf_locks";
+const getUsers = () => JSON.parse(localStorage.getItem(DB_USERS) || "[]");
+const saveUsers = u => localStorage.setItem(DB_USERS, JSON.stringify(u));
+
+/* =========================================================
+   CATÁLOGO DE HOSPEDAJES (oferta de los Proveedores)
+   ========================================================= */
+const ciudades = ["Cartagena","Bogotá","Medellín","Cali","Santa Marta"];
+const nombres = ["Caribe","Andino","Mirador","Palmas","Sunset","Plaza","Royal","Imperial","Colonial","Boutique","Amanecer","Cielo"];
+const caracteristicas = ["WiFi gratis","Piscina","Spa","Gimnasio","Restaurant","Bar","Parking","Pet-friendly"];
+const colores = ["#7E80FF","#4C5EFF","#FF8F5C","#28a745","#e74c3c","#8e44ad","#16a085","#d35400"];
+const hoteles = [];
+for (let i = 0; i < 18; i++) {
+  const features = [];
+  const n = Math.floor(Math.random()*4)+2;
+  while (features.length < n) {
+    const f = caracteristicas[Math.floor(Math.random()*caracteristicas.length)];
+    if (!features.includes(f)) features.push(f);
+  }
+  hoteles.push({
+    nombre: "Hotel " + nombres[i % nombres.length],
+    ciudad: ciudades[Math.floor(Math.random()*ciudades.length)],
+    precio: Math.floor(Math.random()*(480000-80000)/1000)*1000 + 80000,
+    rating: (Math.random()*(5-3.5)+3.5).toFixed(1),
+    features
+  });
+}
+
+/* =========================================================
+   NAVEGACIÓN ENTRE PANTALLAS
+   ========================================================= */
+let rolSeleccionado = "viajero";
+function showScreen(id) {
+  document.querySelectorAll(".screen,.app-screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  const m1 = document.getElementById("loginMsg"), m2 = document.getElementById("regMsg");
+  if (m1) m1.className = "msg error";
+  if (m2) m2.className = "msg error";
+  document.getElementById("filterError").classList.remove("show");
+  window.scrollTo(0,0);
+}
+function setRole(btn) {
+  btn.parentElement.querySelectorAll(".role-tab").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  rolSeleccionado = btn.dataset.role;
+  document.getElementById("negocioRow").style.display = rolSeleccionado === "proveedor" ? "flex" : "none";
+  document.getElementById("docLabel").textContent = rolSeleccionado === "proveedor"
+    ? "Cargar documento legal/comercial (RUT, cámara de comercio...)"
+    : "Cargar documento de identidad";
+}
+function mostrarCatalogo(e){ e.preventDefault(); window.scrollTo({top: document.querySelector(".hotels").offsetTop - 80, behavior:"smooth"}); }
+
+/* =========================================================
+   CU-01 / CU-02 — REGISTRO CON VALIDACIÓN DE DOCUMENTO
+   ========================================================= */
+let documentoValido = null;
+function onDocSelected(input) {
+  const ok = document.getElementById("docOk");
+  documentoValido = null;
+  if (!input.files.length) { ok.textContent = ""; return; }
+  const file = input.files[0];
+  // Validación lógica: formato, peso y coherencia básica
+  const extOk = /\.(pdf|jpe?g|png)$/i.test(file.name);
+  const sizeOk = file.size > 0 && file.size <= 5 * 1024 * 1024;
+  if (extOk && sizeOk) {
+    documentoValido = { nombre: file.name, size: file.size };
+    ok.textContent = "✔ Documento cargado: " + file.name;
+  } else {
+    ok.textContent = "";
+    mostrarError("regMsg", rolSeleccionado === "proveedor"
+      ? "Documento no válido para registro comercial. Verifica el tipo de documento cargado"
+      : "Documento no válido. Verifica que esté vigente y en buen estado");
+  }
+}
+function validarEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+function mostrarError(id, texto) { const m = document.getElementById(id); m.textContent = "⚠ " + texto; m.className = "msg error"; }
+function mostrarOk(id, texto) { const m = document.getElementById(id); m.textContent = "✔ " + texto; m.className = "msg ok"; }
+
+function registrar() {
+  const email = document.getElementById("emailReg").value.trim();
+  const pass = document.getElementById("passwordReg").value;
+  const negocio = document.getElementById("nombreNegocio").value.trim();
+
+  if (!validarEmail(email)) return mostrarError("regMsg", "Ingresa un correo con formato válido.");
+  if (pass.length < 8) return mostrarError("regMsg", "La contraseña debe tener mínimo 8 caracteres.");
+  if (rolSeleccionado === "proveedor" && !negocio) return mostrarError("regMsg", "Ingresa el nombre del negocio.");
+  // E2: documento obligatorio
+  if (!documentoValido) return mostrarError("regMsg", "Debes cargar tu documento de identidad para completar el registro.");
+
+  const users = getUsers();
+  if (users.some(u => u.email === email && u.role === rolSeleccionado))
+    return mostrarError("regMsg", "Este correo ya está registrado como " + rolSeleccionado + ".");
+
+  users.push({ email, password: pass, role: rolSeleccionado, negocio, documento: documentoValido });
+  saveUsers(users);
+  mostrarOk("regMsg", "¡Cuenta creada y validada! Ya puedes iniciar sesión.");
+  setTimeout(() => { document.getElementById("emailReg").value=""; document.getElementById("passwordReg").value="";
+    document.getElementById("nombreNegocio").value=""; document.getElementById("docInput").value="";
+    document.getElementById("docOk").textContent=""; documentoValido=null; showScreen("login"); }, 1200);
+}
+
+/* =========================================================
+   CU-03 / CU-04 — INICIO DE SESIÓN
+   ========================================================= */
+function getLocks(){ return JSON.parse(localStorage.getItem(DB_LOCKS) || "{}"); }
+function saveLocks(l){ localStorage.setItem(DB_LOCKS, JSON.stringify(l)); }
+
+function login() {
+  const email = document.getElementById("emailLogin").value.trim();
+  const pass = document.getElementById("passwordLogin").value;
+  // E1: campos vacíos
+  if (!email || !pass) return mostrarError("loginMsg", "Por favor completa todos los campos.");
+
+  const locks = getLocks();
+  const key = rolSeleccionado + ":" + email;
+  // E2: bloqueo por 5 fallos consecutivos (10 min)
+  if (locks[key] && locks[key].until > Date.now()) {
+    const mins = Math.ceil((locks[key].until - Date.now()) / 60000);
+    return mostrarError("loginMsg", "Acceso temporalmente bloqueado por seguridad. Intenta en " + mins + " minuto(s).");
+  }
+
+  const user = getUsers().find(u => u.email === email && u.role === rolSeleccionado);
+  if (!user || user.password !== pass) {
+    locks[key] = locks[key] || { fails: 0, until: 0 };
+    locks[key].fails++;
+    if (locks[key].fails >= 5) {
+      locks[key].until = Date.now() + 10 * 60 * 1000;
+      locks[key].fails = 0;
+      saveLocks(locks);
+      return mostrarError("loginMsg", "5 intentos fallidos. Acceso bloqueado por 10 minutos.");
+    }
+    saveLocks(locks);
+    return mostrarError("loginMsg", "Correo o contraseña incorrectos. Intenta de nuevo.");
+  }
+  delete locks[key]; saveLocks(locks);
+  // Credenciales correctas: cargar pantalla principal
+  document.getElementById("sessionInfo").textContent =
+    (rolSeleccionado === "proveedor" ? "🏨 " + (user.negocio || "Proveedor") : "🧳 Viajero") + " · " + email;
+  document.getElementById("emailLogin").value = ""; document.getElementById("passwordLogin").value = "";
+  showScreen("app");
+  renderHoteles();
+}
+function logout() { showScreen("hero"); }
+
+/* =========================================================
+   CU-05 — BUSCAR HOSPEDAJE POR PRECIO
+   ========================================================= */
+const fmt = n => "$" + n.toLocaleString("es-CO");
+function syncSliders() {
+  const mn = parseInt(document.getElementById("precioMin").value) || 0;
+  const mx = parseInt(document.getElementById("precioMax").value) || 500000;
+  document.getElementById("sliderMin").value = mn;
+  document.getElementById("sliderMax").value = mx;
+  document.getElementById("lblMin").textContent = fmt(mn);
+  document.getElementById("lblMax").textContent = fmt(mx);
+}
+function syncInputs() {
+  const mn = parseInt(document.getElementById("sliderMin").value);
+  const mx = parseInt(document.getElementById("sliderMax").value);
+  document.getElementById("precioMin").value = mn;
+  document.getElementById("precioMax").value = mx;
+  document.getElementById("lblMin").textContent = fmt(mn);
+  document.getElementById("lblMax").textContent = fmt(mx);
+}
+function aplicarFiltro() {
+  const err = document.getElementById("filterError");
+  err.classList.remove("show");
+  const minVal = document.getElementById("precioMin").value.trim();
+  const maxVal = document.getElementById("precioMax").value.trim();
+  const min = Number(minVal), max = Number(maxVal);
+  const btn = document.getElementById("btnAplicar");
+
+  // E1: valores negativos o no numéricos
+  if (minVal === "" || maxVal === "" || isNaN(min) || isNaN(max) || min < 0 || max < 0) {
+    btn.disabled = true;
+    err.textContent = "⚠ Valor inválido, ingresa solo números positivos";
+    err.classList.add("show");
+    return;
+  }
+  // E2: mínimo mayor que máximo
+  if (min > max) {
+    btn.disabled = true;
+    err.textContent = "⚠ El valor mínimo no puede ser mayor al máximo.";
+    err.classList.add("show");
+    return;
+  }
+  btn.disabled = false;
+  renderHoteles(min, max);
+}
+function renderHoteles(min = null, max = null) {
+  const list = document.getElementById("hotel-list");
+  let visibles = hoteles;
+  if (min !== null && max !== null) visibles = hoteles.filter(h => h.precio >= min && h.precio <= max);
+  document.getElementById("noResults").classList.toggle("show", visibles.length === 0);
+
+  list.innerHTML = visibles.map((h, i) => {
+    const badge = h.rating >= 4.5 ? "Premium" : h.rating >= 4.0 ? "Popular" : "Buena opción";
+    return `<div class="hotel-card">
+      <div class="hotel-card__image" style="background:linear-gradient(135deg,${colores[i % colores.length]},${colores[(i+3) % colores.length]});">🏨
+        <div class="hotel-card__badge">${badge}</div>
+      </div>
+      <div class="hotel-card__content">
+        <h3 class="hotel-card__name">${h.nombre}</h3>
+        <p class="hotel-card__city">📍 ${h.ciudad}</p>
+        <div class="hotel-card__info">
+          <span class="hotel-card__rating">⭐ ${h.rating}/5</span>
+          <div><div class="hotel-card__price-amount">${fmt(h.precio)}</div><div class="hotel-card__price-label">COP/noche</div></div>
+        </div>
+        <div class="hotel-card__features">${h.features.map(f => `<span class="hotel-card__feature">${f}</span>`).join("")}</div>
+        <button class="hotel-card__btn" onclick="alert('Estás viendo: ${h.nombre}\\nUbicado en: ${h.ciudad}\\nPrecio: ${fmt(h.precio)} COP/noche')">Ver detalles</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+document.getElementById("precioMin").addEventListener("input", () => { document.getElementById("btnAplicar").disabled = false; });
+document.getElementById("precioMax").addEventListener("input", () => { document.getElementById("btnAplicar").disabled = false; });
+</script>
 </body>
-
 </html>
