@@ -10,7 +10,7 @@
 html,body{overflow-x:hidden;}
 :root{--blanco:#fafafa;--violeta:#7E80FF;--naranja:#FFD28F;--azul:#4C5EFF;--hover:#FF8F5C;--titulo:#2C2C2C;--texto:#6B6B6B;}
 .hidden{display:none !important;}
-
+ 
 /* ============ HERO ============ */
 .hero{height:100vh;display:none;flex-direction:column;justify-content:center;align-items:center;color:#fff;text-align:center;position:relative;box-shadow:inset 0 0 50px rgba(0,0,0,0.7);}
 .hero.active{display:flex;animation:fadeIn .6s ease;}
@@ -23,7 +23,7 @@ html,body{overflow-x:hidden;}
 .hero__btn{font-family:"Montserrat",sans-serif;font-weight:bold;background-color:#28a745;color:#fff;border:none;padding:10px 20px;margin:10px;border-radius:22px;cursor:pointer;font-size:1rem;transition:all .3s ease;}
 .hero__btn:hover{transform:scale(1.05);box-shadow:0 4px 15px rgba(40,167,69,0.4);}
 .hero__btn--ghost{background:transparent;border:2px solid #fff;}
-
+ 
 /* ============ LOGIN / REGISTRO ============ */
 .login,.registro{height:100vh;display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;font-weight:bold;color:#fff;}
 .login.active,.registro.active{display:flex;animation:fadeIn .6s ease;}
@@ -50,7 +50,7 @@ input[type=file]{display:none;}
 .msg{display:none;margin:.9rem auto 0;padding:.7rem 1rem;border-radius:10px;font-size:.92rem;max-width:520px;font-family:"Open Sans",sans-serif;font-weight:600;}
 .msg.error{display:block;background:rgba(200,40,40,.92);color:#fff;}
 .msg.ok{display:block;background:rgba(40,167,69,.92);color:#fff;}
-
+ 
 /* ============ APP ============ */
 .app{display:none;min-height:100vh;background:#fff;}
 .app.active{display:block;animation:fadeIn .6s ease;}
@@ -69,7 +69,7 @@ input[type=file]{display:none;}
 .app__banner::after{content:"";position:absolute;bottom:0;left:0;width:100%;height:150px;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,#fff 100%);}
 .app__subtitle{color:#fff;font-size:clamp(1.6rem,2.8rem,4rem);font-weight:bold;text-shadow:2px 2px 6px rgba(39,39,39,0.5);z-index:1;}
 .app__paragraph{color:#fefefe;font-size:clamp(1rem,1.6rem,2rem);font-family:"Open Sans",sans-serif;font-weight:bold;text-shadow:2px 1px 7px rgba(90,90,90,0.8);z-index:1;}
-
+ 
 /* ============ BÚSQUEDA / FILTRO DE PRECIO (CU-05) ============ */
 .search{padding:2rem;display:flex;justify-content:center;align-items:center;}
 .search__container{width:100%;max-width:1200px;display:flex;justify-content:center;padding:0 1rem;}
@@ -89,7 +89,7 @@ input[type=file]{display:none;}
 .search__btn:disabled{background:#b9bcc9;box-shadow:none;cursor:not-allowed;}
 .filter-error{display:none;color:#c0392b;font-size:.9rem;margin-top:1rem;text-align:center;font-weight:600;font-family:"Open Sans",sans-serif;}
 .filter-error.show{display:block;}
-
+ 
 /* ============ HOTELES ============ */
 .hotels{padding:3rem 2rem;max-width:1400px;margin:0 auto;}
 .hotels__header{text-align:center;margin-bottom:2.5rem;}
@@ -118,9 +118,9 @@ input[type=file]{display:none;}
 .hotel-card__feature{padding:.25rem .75rem;background:#f1f3f4;border-radius:15px;font-size:.8rem;color:#666;}
 .hotel-card__btn{width:100%;padding:.875rem;background:linear-gradient(135deg,var(--violeta),var(--azul));color:#fff;border:none;border-radius:15px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s ease;text-transform:uppercase;letter-spacing:.5px;}
 .hotel-card__btn:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(111,66,193,0.3);}
-
+ 
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-
+ 
 @media(max-width:768px){
 .hero__overlay{width:90%;}
 .app__nav--container{flex-direction:column;}
@@ -139,7 +139,7 @@ input[type=file]{display:none;}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
+ 
 <!-- ================= HERO ================= -->
 <section id="hero" class="hero active">
   <img src="https://images.pexels.com/photos/16637471/pexels-photo-16637471.jpeg" alt="Caño Cristales, Colombia" class="hero__img">
@@ -150,7 +150,7 @@ input[type=file]{display:none;}
     <button class="hero__btn hero__btn--ghost" onclick="showScreen('registro')">Crear cuenta</button>
   </div>
 </section>
-
+ 
 <!-- ================= LOGIN (CU-03 / CU-04) ================= -->
 <section id="login" class="login">
   <img src="https://images.pexels.com/photos/11815937/pexels-photo-11815937.jpeg" alt="Monserrate, Bogotá" class="login__img">
@@ -167,7 +167,7 @@ input[type=file]{display:none;}
     <p class="back-link" onclick="showScreen('hero')">← Volver al inicio</p>
   </div>
 </section>
-
+ 
 <!-- ================= REGISTRO (CU-01 / CU-02) ================= -->
 <section id="registro" class="registro">
   <img src="https://images.pexels.com/photos/26600364/pexels-photo-26600364.jpeg" alt="Cartagena" class="registro__img">
@@ -190,7 +190,7 @@ input[type=file]{display:none;}
     <p class="back-link" onclick="showScreen('hero')">← Volver al inicio</p>
   </div>
 </section>
-
+ 
 <!-- ================= APP (CU-05) ================= -->
 <section id="app" class="app">
   <header class="app__header">
@@ -204,12 +204,12 @@ input[type=file]{display:none;}
       </ul>
     </div>
   </header>
-
+ 
   <div class="app__banner">
     <h2 class="app__subtitle">Bienvenido a Security Fly</h2>
     <p class="app__paragraph">Tu compañero de viaje confiable</p>
   </div>
-
+ 
   <!-- FILTRO DE PRECIO - CU-05 -->
   <section class="search">
     <div class="search__container">
@@ -239,7 +239,7 @@ input[type=file]{display:none;}
       </div>
     </div>
   </section>
-
+ 
   <section class="hotels">
     <div class="hotels__header">
       <h2 class="hotels__title">Hospedajes en Colombia</h2>
@@ -257,7 +257,7 @@ input[type=file]{display:none;}
     <div id="hotel-list" class="hotel-grid"></div>
   </section>
 </section>
-
+ 
 <script>
 /* =========================================================
    CAPA DE PERSISTENCIA (simula la base de datos)
@@ -268,7 +268,7 @@ const getUsers  = () => JSON.parse(localStorage.getItem(DB_USERS) || "[]");
 const saveUsers = u => localStorage.setItem(DB_USERS, JSON.stringify(u));
 const getLocks  = () => JSON.parse(localStorage.getItem(DB_LOCKS) || "{}");
 const saveLocks = l => localStorage.setItem(DB_LOCKS, JSON.stringify(l));
-
+ 
 /* =========================================================
    CATÁLOGO DE HOSPEDAJES (oferta de Proveedores)
    ========================================================= */
@@ -291,11 +291,11 @@ for (let i = 0; i < 18; i++) {
     features
   });
 }
-
+ 
 /* ============ Estado de filtros ============ */
 let ciudadActual = "all";
 let rangoPrecio = null; // {min, max}
-
+ 
 /* =========================================================
    NAVEGACIÓN ENTRE PANTALLAS
    ========================================================= */
@@ -317,7 +317,7 @@ function setRole(btn) {
     ? "Cargar Documento Legal / Comercial"
     : "Cargar Documento de Identidad";
 }
-
+ 
 /* =========================================================
    CU-01 / CU-02 — REGISTRO CON VALIDACIÓN DE DOCUMENTO
    ========================================================= */
@@ -344,7 +344,7 @@ const validarEmail = e => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 function showError(id, t){ const m = document.getElementById(id); m.textContent = "⚠ " + t; m.className = "msg error"; }
 function showOk(id, t){ const m = document.getElementById(id); m.textContent = "✔ " + t; m.className = "msg ok"; }
 function hideMsg(id){ const m = document.getElementById(id); if (!m) return; m.className = "msg"; m.textContent = ""; }
-
+ 
 function registrar() {
   const email = document.getElementById("emailReg").value.trim();
   const pass  = document.getElementById("passwordReg").value;
@@ -366,7 +366,7 @@ function registrar() {
     showScreen("login");
   }, 1400);
 }
-
+ 
 /* =========================================================
    CU-03 / CU-04 — INICIO DE SESIÓN
    ========================================================= */
@@ -402,7 +402,7 @@ function login() {
   renderHoteles();
 }
 function logout(){ showScreen("hero"); }
-
+ 
 /* =========================================================
    CU-05 — BUSCAR HOSPEDAJE POR PRECIO
    ========================================================= */
@@ -447,7 +447,7 @@ function aplicarFiltro() {
 }
 ["precioMin","precioMax"].forEach(id =>
   document.getElementById(id).addEventListener("input", () => { document.getElementById("btnAplicar").disabled = false; }));
-
+ 
 function filtrarCiudad(btn) {
   document.querySelectorAll("#cityFilters .filter-btn").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
@@ -463,7 +463,7 @@ function limpiarFiltro(e){
   renderHoteles();
   document.querySelector(".search").scrollIntoView({behavior:"smooth"});
 }
-
+ 
 function renderHoteles() {
   let visibles = hoteles;
   if (ciudadActual !== "all") visibles = visibles.filter(h => h.ciudad === ciudadActual);
@@ -492,3 +492,4 @@ function renderHoteles() {
 </script>
 </body>
 </html>
+ 
