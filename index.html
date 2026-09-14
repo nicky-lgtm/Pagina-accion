@@ -371,7 +371,7 @@ let sesionActual = null;
 /* =========================================================
    CATÁLOGO DE HOSPEDAJES (oferta demo, simula datos previos)
    ========================================================= */
-const imagenes = ["assets/hotel1.jpg","assets/hotel2.jpg","assets/tayrona1.jpg","assets/tayrona2.jpg","assets/cano2.jpg","assets/jeep.jpg","assets/cartagena.jpg","assets/monserrate.jpg","assets/cocora.jpg","assets/hero.jpg"];
+const imagenes = ["https://pixabay.com/es/photos/agua-al-aire-libre-cielo-viaje-3292794/","https://pixabay.com/es/photos/riu-hotel-spanien-fuerteventura-99533/","https://pixabay.com/es/photos/t%C3%BAnez-hotel-royal-atlas-playa-188536/","https://pixabay.com/es/photos/paisaje-hotel-recurso-paisajes-2016308/","https://pixabay.com/es/images/download/guildrl-hotel-420260_1920.jpg","assets/jeep.jpg","assets/cartagena.jpg","https://pixabay.com/es/photos/grand-hotel-hotel-piscina-2178413/","assets/cocora.jpg","https://pixabay.com/es/photos/piscina-sauna-ba%C3%B1o-apartamento-3001209/"];
 const ciudades = ["Cartagena","Bogotá","Medellín","Cali","Santa Marta"];
 const nombres  = ["Caribe","Andino","Mirador","Palmas","Sunset","Plaza","Royal","Imperial","Colonial","Boutique","Amanecer","Cielo"];
 const caracteristicas = ["WiFi gratis","Piscina","Spa","Gimnasio","Restaurant","Bar","Parking","Pet-friendly"];
@@ -627,7 +627,7 @@ function renderMisPublicaciones() {
   cont.innerHTML = mias.map(l => `
     <div class="mp-card">
       <div class="mp-card__name">${l.nombre}</div>
-      <div class="mp-card__meta">📍 ${l.ciudad} · ★ ${l.rating}/5</div>
+      <div class="mp-card__meta"><i class="fa-solid fa-hotel"></i> ${l.ciudad} · ★ ${l.rating}/5</div>
       <div class="mp-card__price">${fmt(l.precio)} COP/noche</div>
       <button class="mp-delete" onclick="eliminarPublicacion(${l.id})">Eliminar publicación</button>
     </div>
@@ -665,9 +665,9 @@ function renderHoteles() {
       </div>
       <div class="hotel-card__content">
         <h3 class="hotel-card__name">${h.nombre}</h3>
-        <p class="hotel-card__city">📍 ${h.ciudad}</p>
+        <p class="hotel-card__city"><i class="fa-solid fa-city"></i> ${h.ciudad}</p>
         <div class="hotel-card__info">
-          <span class="hotel-card__rating">★ ${h.rating}/5</span>
+          <span class="hotel-card__rating"><i class="fa-solid fa-star"></i> ${h.rating}/5</span>
           <div><div class="hotel-card__price-amount">${fmt(h.precio)}</div><div class="hotel-card__price-label">COP/noche</div></div>
         </div>
         <div class="hotel-card__features">${h.features.map(f => `<span class="hotel-card__feature">${f}</span>`).join("")}</div>
