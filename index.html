@@ -352,13 +352,18 @@ input[type=file]{display:none;}
    Entidad Usuario: {email, password, role, negocio, documento}
    Entidad Publicacion (oferta del Proveedor): {id, proveedorEmail, negocio, nombre, ciudad, precio, imagen, descripcion, features, rating}
    ========================================================= */
-const DB_USERS = "sf_users", DB_LOCKS = "sf_locks", DB_LISTINGS = "sf_listings";
-const getUsers  = () => JSON.parse(localStorage.getItem(DB_USERS) || "[]");
-const saveUsers = u => localStorage.setItem(DB_USERS, JSON.stringify(u));
-const getLocks  = () => JSON.parse(localStorage.getItem(DB_LOCKS) || "{}");
-const saveLocks = l => localStorage.setItem(DB_LOCKS, JSON.stringify(l));
-const getListings  = () => JSON.parse(localStorage.getItem(DB_LISTINGS) || "[]");
-const saveListings = l => localStorage.setItem(DB_LISTINGS, JSON.stringify(l));
+/* NOTA: se usa almacenamiento en memoria (no localStorage) porque
+   el visor de artifacts de Claude.ai bloquea el acceso a localStorage.
+   Los datos viven mientras la página esté abierta. */
+let _memUsers = [];
+let _memLocks = {};
+let _memListings = [];
+const getUsers  = () => _memUsers;
+const saveUsers = u => { _memUsers = u; };
+const getLocks  = () => _memLocks;
+const saveLocks = l => { _memLocks = l; };
+const getListings  = () => _memListings;
+const saveListings = l => { _memListings = l; };
  
 /* Sesión actual (se llena al iniciar sesión) */
 let sesionActual = null;
