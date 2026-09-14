@@ -501,7 +501,7 @@ function login() {
   delete locks[key]; saveLocks(locks);
   sesionActual = { email, role: rolSeleccionado, negocio: user.negocio || "" };
   document.getElementById("sessionInfo").textContent =
-    (rolSeleccionado === "proveedor" ? "🏨 " + (user.negocio || "Proveedor") : "🧳 Viajero") + " · " + email;
+    (rolSeleccionado === "proveedor" ? <i class="fa-solid fa-truck"></i>  + (user.negocio || "Proveedor") :<i class="fa-solid fa-person-walking-luggage"></i> " Viajero") + " · " + email;
   document.getElementById("emailLogin").value = ""; document.getElementById("passwordLogin").value = "";
  
   // Mostrar/ocultar secciones según el rol (Viajero busca, Proveedor publica)
